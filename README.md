@@ -1,2 +1,0 @@
-# memesponja
-website para Memesponja
