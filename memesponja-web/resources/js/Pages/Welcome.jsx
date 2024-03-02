@@ -13,15 +13,15 @@ import meme9 from '../../img/meme9.jpg';
 
 export default function Welcome({ }) {
     const imagenesOriginales = [
-        { url: meme1, nombre: 'Nombre1', descripcion: 'galaxias' },
-        { url: meme2, nombre: 'Nombre2', descripcion: 'pumba' },
-        { url: meme3, nombre: 'Nombre3', descripcion: 'bob esponja no puedo hacerlo' },
-        { url: meme4, nombre: 'Nombre4', descripcion: 'bob esponja calamardo' },
-        { url: meme5, nombre: 'Nombre5', descripcion: 'homero march' },
-        { url: meme6, nombre: 'Nombre6', descripcion: 'good doctor' },
-        { url: meme7, nombre: 'Nombre7', descripcion: 'homero' },
-        { url: meme8, nombre: 'Nombre8', descripcion: 'doctor strange' },
-        { url: meme9, nombre: 'Nombre9', descripcion: 'ben 10' },
+        { url: meme1, nombre: 'Tienes bellotas grandes niño', descripcion: 'galaxias' },
+        { url: meme2, nombre: 'Pumba no enfrente de los niños', descripcion: 'pumba' },
+        { url: meme3, nombre: 'no puedo hacerlo', descripcion: 'bob esponja no puedo hacerlo' },
+        { url: meme4, nombre: 'no sabia que', descripcion: 'bob esponja calamardo' },
+        { url: meme5, nombre: 'homero y march', descripcion: 'homero march' },
+        { url: meme6, nombre: 'doctor llorando', descripcion: 'good doctor' },
+        { url: meme7, nombre: 'homero', descripcion: 'homero' },
+        { url: meme8, nombre: 'doctor strange', descripcion: 'doctor strange' },
+        { url: meme9, nombre: 'ben 10', descripcion: 'ben 10' },
     ];
 
     const [imagenes, setImagenes] = useState(imagenesOriginales);
@@ -31,9 +31,9 @@ export default function Welcome({ }) {
         const valorBusqueda = event.target.value.toLowerCase();
         setBusqueda(valorBusqueda);
 
-        // Filtrar las imágenes según la descripción
+        // Filtrar las imágenes según el nombre
         const imagenesFiltradas = imagenesOriginales.filter((imagen) =>
-            imagen.descripcion.toLowerCase().includes(valorBusqueda)
+            imagen.nombre.toLowerCase().includes(valorBusqueda)
         );
 
         setImagenes(imagenesFiltradas);
@@ -41,22 +41,27 @@ export default function Welcome({ }) {
 
     return (
         <>
-            <div>
+            <div style={{ textAlign: 'center', marginTop: '20px' }}>
                 <input
                     type="text"
-                    placeholder="Buscar por descripción"
+                    placeholder="Buscar por nombre"
                     value={busqueda}
                     onChange={handleBusqueda}
+                    style={{ width: '300px', padding: '5px' }}
                 />
             </div>
             <RViewer imageUrls={imagenes.map(imagen => imagen.url)}>
-                <div style={{ display: 'flex', marginTop: '40px' }}>
+                <div style={{ display: 'flex', flexWrap: 'wrap', marginTop: '40px', justifyContent: 'center' }}>
                     {imagenes.map((imagen, index) => (
                         <RViewerTrigger key={index} index={index}>
-                            <img
-                                src={imagen.url}
-                                style={{ width: '150px', height: '150px', marginLeft: '20px', border: '2px solid black' }}
-                            />
+                            <div style={{ textAlign: 'center', margin: '10px', maxWidth: '150px' }}>
+                                <img
+                                    src={imagen.url}
+                                    style={{ width: '150px', height: '150px', border: '2px solid black' }}
+                                    alt={imagen.nombre}
+                                />
+                                <div>{imagen.nombre}</div>
+                            </div>
                         </RViewerTrigger>
                     ))}
                 </div>
